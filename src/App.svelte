@@ -260,7 +260,7 @@
     />
     <link
         rel="stylesheet"
-        href="https://codemirror.net/5/lib/codemirror.css"
+        href="/codemirror.min.css"
         async
         defer
     />
