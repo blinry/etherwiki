@@ -111,7 +111,7 @@
                 flattenSpans: false,
                 lineWrapping: true,
                 mode: "markdown",
-                theme: "default",
+                theme: "gruvbox-dark",
             })
 
             editor.addOverlay(urlOverlay())

@@ -258,12 +258,8 @@
         href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css"
         rel="stylesheet"
     />
-    <link
-        rel="stylesheet"
-        href="/codemirror.min.css"
-        async
-        defer
-    />
+    <link rel="stylesheet" href="/codemirror.min.css" async defer />
+    <link rel="stylesheet" href="/gruvbox-dark.css" async defer />
 </svelte:head>
 
 {#if title}
