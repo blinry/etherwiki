@@ -106,12 +106,20 @@
 
     $: if (editorDiv) {
         if (!editor) {
+            let theme = "default"
+
+            if (
+                window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+            ) {
+                theme = "gruvbox-dark"
+            }
             editor = CodeMirror(editorDiv, {
                 lineNumbers: true,
                 flattenSpans: false,
                 lineWrapping: true,
                 mode: "markdown",
-                theme: "gruvbox-dark",
+                theme: theme,
             })
 
             editor.addOverlay(urlOverlay())
@@ -308,5 +316,11 @@
         padding-left: 2px;
         padding-right: 2px;
         z-index: 3;
+    }
+    @media (prefers-color-scheme: dark) {
+        :global(.cm-link),
+        :global(.cm-url) {
+            color: #3d80eb !important;
+        }
     }
 </style>
