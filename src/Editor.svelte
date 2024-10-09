@@ -6,6 +6,7 @@
 
     import {CodemirrorBinding} from "y-codemirror"
     import CodeMirror from "codemirror"
+    import "codemirror/mode/markdown/markdown.js"
 
     const dispatch = createEventDispatcher()
 
@@ -109,6 +110,8 @@
                 lineNumbers: true,
                 flattenSpans: false,
                 lineWrapping: true,
+                mode: "markdown",
+                theme: "default",
             })
 
             editor.addOverlay(urlOverlay())
