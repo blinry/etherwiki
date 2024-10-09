@@ -29,7 +29,7 @@ exports.callbackHandler = (update, origin, doc) => {
             content: getContent(
                 sharedObjectName,
                 sharedObjectType,
-                doc
+                doc,
             ).toJSON(),
         }
     })

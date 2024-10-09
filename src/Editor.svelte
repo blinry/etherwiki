@@ -26,7 +26,7 @@
                     .map((t) => escapeRegex(t))
                     .join("|") +
                 ")",
-            "gi"
+            "gi",
         )
 
         return {
@@ -179,7 +179,7 @@
                             e.preventDefault()
                         }
                     }
-                })
+                }),
             )
         }
 
@@ -203,7 +203,7 @@
                             line: editor.doc.lastLine(),
                             ch: editor.doc.getLine(editor.doc.lastLine())
                                 .length,
-                        }
+                        },
                     )
                     editor.focus()
                 }
@@ -241,7 +241,7 @@
             editor.focus()
             editor.doc.setCursor(
                 editor.doc.lastLine(),
-                editor.doc.getLine(editor.doc.lastLine()).length
+                editor.doc.getLine(editor.doc.lastLine()).length,
             )
         },
     }}

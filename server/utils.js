@@ -180,8 +180,8 @@ class WSSharedDoc extends Y.Doc {
                 encoder,
                 awarenessProtocol.encodeAwarenessUpdate(
                     this.awareness,
-                    changedClients
-                )
+                    changedClients,
+                ),
             )
             const buff = encoding.toUint8Array(encoder)
             this.conns.forEach((_, c) => {
@@ -195,7 +195,7 @@ class WSSharedDoc extends Y.Doc {
                 "update",
                 debounce(callbackHandler, CALLBACK_DEBOUNCE_WAIT, {
                     maxWait: CALLBACK_DEBOUNCE_MAXWAIT,
-                })
+                }),
             )
         }
     }
@@ -242,7 +242,7 @@ const messageListener = (conn, doc, message) => {
             awarenessProtocol.applyAwarenessUpdate(
                 doc.awareness,
                 decoding.readVarUint8Array(decoder),
-                conn
+                conn,
             )
             break
         }
@@ -264,7 +264,7 @@ const closeConn = (doc, conn) => {
         awarenessProtocol.removeAwarenessStates(
             doc.awareness,
             Array.from(controlledIds),
-            null
+            null,
         )
         if (doc.conns.size === 0 && persistence !== null) {
             // if persisted, we store state and destroy ydocument
@@ -294,7 +294,7 @@ const send = (doc, conn, m) => {
             m,
             /** @param {any} err */ (err) => {
                 err != null && closeConn(doc, conn)
-            }
+            },
         )
     } catch (e) {
         closeConn(doc, conn)
@@ -311,7 +311,7 @@ const pingTimeout = 30000
 exports.setupWSConnection = (
     conn,
     req,
-    {docName = req.url.slice(1).split("?")[0], gc = true} = {}
+    {docName = req.url.slice(1).split("?")[0], gc = true} = {},
 ) => {
     conn.binaryType = "arraybuffer"
     // get doc, initialize if it does not exist yet
@@ -321,7 +321,7 @@ exports.setupWSConnection = (
     conn.on(
         "message",
         /** @param {ArrayBuffer} message */ (message) =>
-            messageListener(conn, doc, new Uint8Array(message))
+            messageListener(conn, doc, new Uint8Array(message)),
     )
 
     // Check if connection is still alive
@@ -365,8 +365,8 @@ exports.setupWSConnection = (
                 encoder,
                 awarenessProtocol.encodeAwarenessUpdate(
                     doc.awareness,
-                    Array.from(awarenessStates.keys())
-                )
+                    Array.from(awarenessStates.keys()),
+                ),
             )
             send(doc, conn, encoding.toUint8Array(encoder))
         }

@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000
 const server = http.createServer((request, response) =>
     serveHandler(request, response, {
         public: "public",
-    })
+    }),
 )
 
 wss.on("connection", setupWSConnection)
