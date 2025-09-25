@@ -1,7 +1,14 @@
 <script>
     var title, enterTitle
+
+    let searchTerm = ""
+
     function hashchange() {
-        title = window.location.hash.substring(1)
+        let parts = window.location.hash.substring(1).split("/", 2)
+        title = parts[0]
+        if (parts[1]) {
+            searchTerm = parts[1]
+        }
         if (title.length == 0) {
             title = null
         }
@@ -9,7 +16,11 @@
     window.addEventListener("hashchange", hashchange)
     hashchange()
     $: if (title) {
-        window.location.hash = title
+        if (searchTerm === "") {
+            window.location.hash = title
+        } else {
+            window.location.hash = title + "/" + searchTerm
+        }
     }
 
     import Editor from "./Editor.svelte"
@@ -189,7 +200,6 @@
     }
 
     let searchInput
-    let searchTerm = ""
 
     $: if (searchTerm.length > 0) {
         let matchingPages = [...pages]
